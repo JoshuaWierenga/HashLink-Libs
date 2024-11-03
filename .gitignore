@@ -1,4 +1,12 @@
-hashlink/
-haxe/
-neko/
+/.haxelib/
+/hashlink/
+/haxe/
+/neko/
+/out/
+/tmp/
+
 nppBackup/
+
+hashlink.tar.gz
+haxe.tar.gz
+neko.tar.gz

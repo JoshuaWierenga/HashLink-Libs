@@ -1,9 +1,17 @@
-# /bin/sh
+#!/bin/sh -e
 
 TARGET=PCTest
-TMP=./tmp/
+TMP=./tmp
+OUT=./out
+HASHLINK=./.haxelib/hashlink/git/src
 
-haxe --main $TARGET --hl $TARGET.hl -dce std
-haxe --main $TARGET --hl $TMP/$TARGET.c -dce std
-gcc -o $TARGET $TARGET.c hlc_main.c hashlink/*.c -I hashlink/include -I $TMP -L hashlink -l hl -l m -D USE_BYTECODE
-./$TARGET
+# Build Hashlink bytecode
+haxe -p ./src/ -m $TARGET --hl $OUT/$TARGET.hl
+
+# Build Hashlink bytecode VM + exec
+haxe -p ./src/ -m $TARGET --hl $TMP/$TARGET.c
+gcc -o $OUT/$TARGET src/*.c $HASHLINK/code.c $HASHLINK/jit.c $HASHLINK/module.c \
+    -I hashlink/include/ -I $HASHLINK/ -I $TMP/ \
+    -L hashlink/ \
+    -l hl -l m \
+    -D USE_BYTECODE

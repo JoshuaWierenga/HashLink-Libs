@@ -1,5 +1,10 @@
 # Build instructions
 Download HashLink, Haxe and Neko binaries to subdirectories with matching lowercase names.
+If they are not already installed then run:
+```sh
+./Setup.sh
+```
+which will install them and then launch a subshell with them available.
 
 Set haxelib library download location with:
 ```sh

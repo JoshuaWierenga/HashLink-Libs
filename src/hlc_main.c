@@ -20,9 +20,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include <hl.h>
-#include <hlmodule.h>
 #include <stdbool.h>
 #include <stddef.h>
+
+#ifdef USE_BYTECODE
+#include <hlmodule.h>
 
 #ifdef HL_WIN
 #include <locale.h>
@@ -40,6 +42,8 @@ typedef char pchar;
 #define pcompare strcmp
 #define ptoi atoi
 #define PSTR(x) x
+#endif
+
 #endif
 
 
@@ -195,7 +199,7 @@ bool hl_lib_setup(int argc, char *argv[]) {
   hl_sys_init((void**)(argv + 1), argc - 1, NULL);
 
 #ifdef USE_BYTECODE
-  pchar *file = PSTR("PCTest.hl");
+  pchar *file = PSTR("./out/PCTest.hl");
   FILE *fchk = pfopen(file,"rb");
   if(fchk == NULL) {
     pprintf("Unable to find bytecode file: %s\n", file);
