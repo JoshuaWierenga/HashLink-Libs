@@ -46,7 +46,7 @@ extract_tar_gz() {
 }
 
 if [ "$#" -eq 1 ] && [ "$1" = "-f" ]; then
-  rm -rf .haxelib haxe neko out tmp
+  rm -rf .haxelib hashlink haxe neko out tmp
 fi
 
 if [ ! -d haxe ]; then
@@ -89,7 +89,7 @@ if ! command -v neko > /dev/null 2>&1; then
 fi
 
 if ! command -v hl > /dev/null 2>&1; then
-  PATH=$PWD/neko:$PATH
+  PATH=$PWD/hashlink:$PATH
   LD_LIBRARY_PATH=$PWD/hashlink:$LD_LIBRARY_PATH
   NEED_SUBSHELL=true
 fi
